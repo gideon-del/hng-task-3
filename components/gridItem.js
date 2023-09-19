@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { motion } from "framer-motion";
 import { useAnimate } from "framer-motion";
+
 const GridItem = ({ item, index, moveItem }) => {
   const animate = useAnimate();
   const [collect, ref, previewref] = useDrag(() => ({
@@ -32,7 +33,10 @@ const GridItem = ({ item, index, moveItem }) => {
   return (
     <>
       <motion.div
-        ref={(node) => ref(drop(node))}
+        ref={(node) => {
+          ref(drop(node));
+          previewref(node, { captureDraggingState: true });
+        }}
         className={`my-masonry-grid_item drop_item touch-none`}
         initial={{ opacity: 1, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
