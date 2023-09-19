@@ -47,8 +47,12 @@ export default function Home() {
       <main>
         <section>
           <h1>Gallery</h1>
-          {device < 769 ? <Mobile /> : <Desktop />}
-          {/* <Mobile /> */}
+          <div className="hidden md:block">
+            <Desktop />
+          </div>
+          <div className="md:hidden">
+            <Mobile />
+          </div>
         </section>
       </main>
     </>
