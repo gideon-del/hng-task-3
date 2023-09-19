@@ -19,7 +19,7 @@ import Desktop from "@/components/desktop";
 export default function Home() {
   const [isAuth, setIsAuth] = useState(false);
   const { user, loading } = useAuth();
-  const [device, setDevice] = useState(769);
+  const [device, setDevice] = useState(300);
   useEffect(() => {
     setDevice(window.innerWidth);
   }, []);
@@ -47,8 +47,8 @@ export default function Home() {
       <main>
         <section>
           <h1>Gallery</h1>
-          {/* {device < 769 ? <Mobile /> : <Desktop />} */}
-          <Mobile />
+          {device < 769 ? <Mobile /> : <Desktop />}
+          {/* <Mobile /> */}
         </section>
       </main>
     </>
