@@ -2,7 +2,9 @@ import Image from "next/image";
 import { useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { motion } from "framer-motion";
+import { useAnimate } from "framer-motion";
 const GridItem = ({ item, index, moveItem }) => {
+  const animate = useAnimate();
   const [{}, ref] = useDrag(() => ({
     type: "MASONRY_ITEM",
     item: { index },
@@ -36,19 +38,22 @@ const GridItem = ({ item, index, moveItem }) => {
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.3 }}
     >
-      <Image
-        src={item.img}
-        alt="image"
-        width={400}
-        height={400}
-        className="w-full h-auto"
-      />
+      <figure className="drop_item">
+        <Image
+          src={item.img}
+          alt="image"
+          width={400}
+          height={400}
+          className="w-full h-auto"
+        />
+        <div></div>
+      </figure>
 
       {isHovering && hovered && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className={`bg-black/50 text-white font-bold grid place-items-center`}
+          className={`bg-black/50  text-white font-bold grid place-items-center`}
         >
           <span>Drop Here</span>
         </motion.div>
