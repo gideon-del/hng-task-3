@@ -47,8 +47,8 @@ export default function Home() {
       <main>
         <section>
           <h1>Gallery</h1>
-          {device < 769 ? <Mobile /> : <Desktop />}
-          {/* <Desktop /> */}
+          {/* {device < 769 ? <Mobile /> : <Desktop />} */}
+          <Mobile />
         </section>
       </main>
     </>

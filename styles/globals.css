@@ -46,5 +46,6 @@
   .drop_item > * {
     grid-column: 1/1;
     grid-row: 1/1;
+    pointer-events: none;
   }
 }
