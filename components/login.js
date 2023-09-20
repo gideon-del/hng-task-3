@@ -3,24 +3,20 @@ import background from "@/public/assets/login_bg.jpg";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/utils/firebase";
 import { toaster } from "@/utils/toaster";
-import { useAuth } from "@/context/user";
 import { useSignIn } from "@clerk/nextjs";
 import Loader from "./loader";
-import { useRouter } from "next/router";
 import Link from "next/link";
 const Login = () => {
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
   const { signIn, isLoaded, setActive } = useSignIn();
-  const { push } = useRouter();
+
   const validateEmail = (value) => {
     const emailPattern =
       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;

@@ -1,16 +1,13 @@
 import { useState } from "react";
-import MasonaryGrid, { MasonaryItem } from "./masonaryGrid";
+import MasonaryItem from "./masonaryGrid";
 import { dummyData } from "@/utils/dummyData";
 import { motion } from "framer-motion";
 import {
   DndContext,
   DragOverlay,
-  DragOverlayItem,
   MouseSensor,
-  PointerSensor,
   TouchSensor,
   closestCenter,
-  defaultDropAnimation,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
@@ -24,7 +21,7 @@ const Grid = ({ items }) => {
   const [images, setImages] = useState(items || dummyData);
   const touchSensor = useSensor(TouchSensor, {
     activationConstraint: {
-      delay: 1000,
+      delay: 250,
     },
   });
 
@@ -70,7 +67,9 @@ const Grid = ({ items }) => {
         className=" columns-1 md:columns-2 lg:columns-3 space-y-5 "
       >
         <SortableContext items={images} strategy={rectSortingStrategy}>
-          <MasonaryGrid items={images} />;
+          {images.map((img) => (
+            <MasonaryItem key={img.id} img={img} />
+          ))}
         </SortableContext>
         <DragOverlay>
           {activeId && getSingleImage(activeId) ? (

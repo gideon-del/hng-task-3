@@ -1,7 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import Image from "next/image";
 import React from "react";
-import Masonry from "react-masonry-css";
 import { CSS } from "@dnd-kit/utilities";
 import { motion } from "framer-motion";
 export const MasonaryItem = ({ img }) => {
@@ -56,14 +55,5 @@ export const MasonaryItem = ({ img }) => {
     </motion.div>
   );
 };
-const MasonaryGrid = ({ items }) => {
-  return (
-    <>
-      {items.map((img) => (
-        <MasonaryItem key={img.id} id={img.id} img={img} />
-      ))}
-    </>
-  );
-};
 
-export default MasonaryGrid;
+export default MasonaryItem;
