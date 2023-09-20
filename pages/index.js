@@ -18,12 +18,12 @@ export default function Home() {
   const [isAuth, setIsAuth] = useState(false);
   // const { user, loading, logOut, login } = useAuth();
   const [device, setDevice] = useState(300);
-  const { isSignedIn, isLoaded } = useUser();
+  const { isSignedIn, isLoaded, user } = useUser();
 
   return (
     <>
       {!isLoaded && <Loader />}
-      {!isSignedIn ? <Login /> : <Gallery />}
+      {!user ? <Login /> : <Gallery />}
     </>
   );
 }
