@@ -23,7 +23,7 @@ const Grid = ({ item }) => {
   const [images, setImages] = useState(item || dummyData);
   const touchSensor = useSensor(TouchSensor, {
     activationConstraint: {
-      delay: 250,
+      delay: 1000,
       tolerance: 5,
     },
   });
