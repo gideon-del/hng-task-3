@@ -20,8 +20,8 @@ import {
   rectSortingStrategy,
 } from "@dnd-kit/sortable";
 
-const Grid = ({ item }) => {
-  const [images, setImages] = useState(item || dummyData);
+const Grid = ({ items }) => {
+  const [images, setImages] = useState(items || dummyData);
   const touchSensor = useSensor(TouchSensor, {
     activationConstraint: {
       delay: 1000,
@@ -49,7 +49,6 @@ const Grid = ({ item }) => {
     setActiveId(null);
   };
   const handleDragMove = ({ active, over }) => {
-    console.log(active, over);
     setImages(
       arrayMove(images, images.indexOf(active.id), images.indexOf(over?.id))
     );

@@ -1,8 +1,11 @@
 import React from "react";
 import Header from "./header";
-import Grid from "./grid";
+
+import GuestGrid from "./guestGrid";
+import useCanDrag from "@/hooks/useCanDrag";
 
 const Gallery = () => {
+  const Grid = useCanDrag();
   return (
     <>
       <Header />

@@ -10,6 +10,7 @@ import { useAuth } from "@/context/user";
 import { useSignIn } from "@clerk/nextjs";
 import Loader from "./loader";
 import { useRouter } from "next/router";
+import Link from "next/link";
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
@@ -50,7 +51,6 @@ const Login = () => {
       });
       await setActive({ session: res.createdSessionId });
       toaster({ state: "success", message: "Welcome" });
-      push("/gallery");
     } catch (error) {
       toaster({
         state: "error",
@@ -122,6 +122,9 @@ const Login = () => {
                 Log in
               </button>
             </form>
+            <p className="text-blue-700 text-center font-semibold ">
+              <Link href={"/gallery"}>Browse as Guest</Link>
+            </p>
           </div>
         </section>
       </main>

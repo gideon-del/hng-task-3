@@ -1,5 +1,5 @@
-import Grid from "@/components/grid";
 import Header from "@/components/header";
+import useCanDrag from "@/hooks/useCanDrag";
 import { getSingleTags } from "@/utils/dummyData";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ const SearchResult = ({ results }) => {
     query: { id },
   } = useRouter();
   const [items, setItems] = useState(getSingleTags(id.trim().toLowerCase()));
-
+  const Grid = useCanDrag();
   return (
     <>
       <Header />
@@ -19,7 +19,7 @@ const SearchResult = ({ results }) => {
             {id}
           </h1>
           {items.length > 0 ? (
-            <Grid item={items} />
+            <Grid items={items} />
           ) : (
             <p className="text-center font-bold text-white">
               No image with the tag of {id}
