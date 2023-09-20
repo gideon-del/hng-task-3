@@ -19,7 +19,7 @@ const Gallery = () => {
     <>
       <Header />
       <main className="flex-1 relative">
-        <section className="px-14 md:px-20 max-w-5xl mx-auto">
+        <section className="px-14 md:px-20 max-w-7xl mx-auto">
           <h1 className="capitalize">{query || "Gallery"}</h1>
 
           <Grid items={items} />
