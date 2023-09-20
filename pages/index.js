@@ -13,17 +13,19 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/utils/firebase";
 import { useUser } from "@clerk/nextjs";
 import Loader from "@/components/loader";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [isAuth, setIsAuth] = useState(false);
   // const { user, loading, logOut, login } = useAuth();
   const [device, setDevice] = useState(300);
   const { isSignedIn, isLoaded, user } = useUser();
+  const { replace } = useRouter();
 
   return (
     <>
       {!isLoaded && <Loader />}
-      {!user ? <Login /> : <Gallery />}
+      {user ? <Gallery /> : <Login />}
     </>
   );
 }

@@ -4,9 +4,10 @@ import { BiLogOut } from "react-icons/bi";
 import logo from "@/public/assets/logo.png";
 import { useRouter } from "next/router";
 import { useClerk } from "@clerk/nextjs";
+import { toaster } from "@/utils/toaster";
 
 const Header = () => {
-  const { push } = useRouter();
+  const { push, replace } = useRouter();
   const { signOut } = useClerk();
   const search = (e) => {
     e.preventDefault();
@@ -14,6 +15,11 @@ const Header = () => {
     const { search } = Object.fromEntries(data.entries());
     if (search.trim().length === 0) return;
     push(`/search/${search}`);
+  };
+  const logout = async () => {
+    await signOut();
+    toaster({ state: "success", message: "Goodbye" });
+    replace("/");
   };
   return (
     <header className="bg-white/10">
@@ -31,7 +37,7 @@ const Header = () => {
         </form>
         <button
           className="border border-red-600 text-red-600 font-bold px-3 py-2 rounded-md flex gap-2 items-center flex-row-reverse text-lg"
-          onClick={() => signOut()}
+          onClick={logout}
         >
           Log out
           <BiLogOut />

@@ -9,6 +9,7 @@ import { toaster } from "@/utils/toaster";
 import { useAuth } from "@/context/user";
 import { useSignIn } from "@clerk/nextjs";
 import Loader from "./loader";
+import { useRouter } from "next/router";
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
@@ -18,6 +19,7 @@ const Login = () => {
     handleSubmit,
   } = useForm();
   const { signIn, isLoaded, setActive } = useSignIn();
+  const { push } = useRouter();
   const validateEmail = (value) => {
     const emailPattern =
       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -48,6 +50,7 @@ const Login = () => {
       });
       await setActive({ session: res.createdSessionId });
       toaster({ state: "success", message: "Welcome" });
+      push("/gallery");
     } catch (error) {
       toaster({
         state: "error",
