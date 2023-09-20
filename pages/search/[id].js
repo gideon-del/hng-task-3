@@ -8,16 +8,13 @@ const SearchResult = ({ results }) => {
   const {
     query: { id },
   } = useRouter();
-  const [items, setItems] = useState(results);
-  useEffect(() => {
-    const newResults = getSingleTags(id.trim().toLowerCase());
-    setItems(newResults);
-  }, [id]);
+  const [items, setItems] = useState(getSingleTags(id.trim().toLowerCase()));
+
   return (
     <>
       <Header />
       <main className="flex-1">
-        <section className="max-w-7xl mx-auto px-3">
+        <section className="max-w-7xl mx-auto px-20">
           <h1 className="text-2xl capitalize text-center md:text-start text-white mb-5">
             {id}
           </h1>
