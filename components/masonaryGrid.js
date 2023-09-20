@@ -29,11 +29,9 @@ export const MasonaryItem = ({ img }) => {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.8 }}
       transition={{ duration: 0.2 }}
-      className="touch-none"
+      className="touch-mainpulation"
     >
-      <div
-        className={`my-masonry-grid_item drop_item touch-none bg-transparent`}
-      >
+      <div className={`my-masonry-grid_item drop_item  bg-transparent`}>
         <figure className="drop_item">
           <Image
             src={img.img}
