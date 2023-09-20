@@ -5,18 +5,13 @@ import logo from "@/public/assets/logo.png";
 import { useRouter } from "next/router";
 import { useClerk, useUser } from "@clerk/nextjs";
 import { toaster } from "@/utils/toaster";
+import { useFilter } from "@/context/filters";
 
 const Header = () => {
   const { push, replace } = useRouter();
   const { signOut } = useClerk();
   const { user } = useUser();
-  const search = (e) => {
-    e.preventDefault();
-    const data = new FormData(e.target);
-    const { search } = Object.fromEntries(data.entries());
-    if (search.trim().length === 0) return;
-    push(`/search/${search}`);
-  };
+  const { changeQuery } = useFilter();
   const logout = async () => {
     await signOut();
     toaster({ state: "success", message: "Goodbye" });
@@ -28,17 +23,20 @@ const Header = () => {
         <figure className="logo">
           <Image src={logo} alt="Snap Shot" width={40} height={40} />
         </figure>
-        <form className="basis-3/5 search" onSubmit={search}>
-          <input
-            type="text"
-            name="search"
-            placeholder="Search by tag e.g Animal"
-            className="border-gray-300 rounded-full px-4 py-2 border w-full placeholder:text-white/30 text-white bg-transparent"
-          />
-        </form>
+
+        <input
+          type="text"
+          name="search"
+          placeholder="Search by tag e.g Animal"
+          className="border-gray-300 rounded-full px-4 py-2 border w-full placeholder:text-white/30 text-white bg-transparent"
+          onChange={(e) => {
+            changeQuery(e.target.value.trim());
+          }}
+        />
+
         {user ? (
           <button
-            className="border border-red-600 text-red-600 font-bold text-center justify-center px-3 py-2 rounded-md flex gap-2 items-center flex-row-reverse text-lg btn"
+            className="border border-red-600 text-red-600 font-bold text-center justify-center px-3 py-2 rounded-md flex gap-2 items-center flex-row-reverse text-lg btn whitespace-nowrap"
             onClick={logout}
           >
             Log out
@@ -48,7 +46,7 @@ const Header = () => {
           </button>
         ) : (
           <button
-            className="bg-blue-700  text-white font-bold px-3 justify-center py-2 rounded-md flex gap-2 items-center flex-row-reverse text-lg btn"
+            className="bg-blue-700  text-white font-bold px-3 whitespace-nowrap justify-center py-2 rounded-md flex gap-2 items-center flex-row-reverse text-lg btn"
             onClick={() => push("/")}
           >
             Log in

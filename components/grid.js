@@ -17,9 +17,11 @@ import {
   rectSortingStrategy,
 } from "@dnd-kit/sortable";
 import Preview from "./preview";
+import { useFilter } from "@/context/filters";
 
 const Grid = ({ items }) => {
-  const [images, setImages] = useState(items || dummyData);
+  const { query, filters, changeFilters } = useFilter();
+
   const touchSensor = useSensor(TouchSensor, {
     activationConstraint: {
       delay: 250,
@@ -34,26 +36,26 @@ const Grid = ({ items }) => {
   };
   const handleDragEnd = ({ active, over }) => {
     if (active.id !== over.id) {
-      const oldIndex = images.findIndex((item) => item.id === active.id);
-      const newIndex = images.findIndex((item) => item.id === over.id);
+      const oldIndex = filters.findIndex((item) => item.id === active.id);
+      const newIndex = filters.findIndex((item) => item.id === over.id);
 
-      const newImages = [...images];
-      newImages.splice(oldIndex, 1);
-      newImages.splice(newIndex, 0, images[oldIndex]);
+      const newfilters = [...filters];
+      newfilters.splice(oldIndex, 1);
+      newfilters.splice(newIndex, 0, filters[oldIndex]);
 
-      setImages(newImages);
+      changeFilters(newfilters);
     }
     setActiveId(null);
     setOverId(null);
   };
   const handleDragMove = ({ active, over }) => {
     setOverId(over?.id);
-    setImages(
-      arrayMove(images, images.indexOf(active.id), images.indexOf(over?.id))
+    changeFilters(
+      arrayMove(filters, filters.indexOf(active.id), filters.indexOf(over?.id))
     );
   };
   const getSingleImage = (id) => {
-    const img = images.filter((img) => img.id === id) || [];
+    const img = filters.filter((img) => img.id === id) || [];
 
     return img;
   };
@@ -69,8 +71,8 @@ const Grid = ({ items }) => {
         layout
         className=" columns-1 md:columns-2 lg:columns-3 space-y-5 "
       >
-        <SortableContext items={images} strategy={rectSortingStrategy}>
-          {images.map((img) => (
+        <SortableContext items={filters} strategy={rectSortingStrategy}>
+          {filters.map((img) => (
             <MasonaryItem key={img.id} img={img} overId={overId} />
           ))}
         </SortableContext>

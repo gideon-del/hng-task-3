@@ -2,8 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import GuestItem from "./guestItem";
 import { dummyData } from "@/utils/dummyData";
+import { useFilter } from "@/context/filters";
 const GuestGrid = ({ items }) => {
-  const images = items || dummyData;
+  const { filters, query } = useFilter();
+  const images = items;
   return (
     <motion.div
       layout
