@@ -35,7 +35,10 @@ const Grid = ({ items }) => {
     setActiveId(active.id);
   };
   const handleDragEnd = ({ active, over }) => {
-    if (active.id !== over.id) {
+    if (!over.id) {
+      return;
+    }
+    if (active.id !== over?.id) {
       const oldIndex = filters.findIndex((item) => item.id === active.id);
       const newIndex = filters.findIndex((item) => item.id === over.id);
 

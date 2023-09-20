@@ -35,9 +35,11 @@ export const MasonaryItem = ({ img, overId }) => {
           <Image
             src={img.img}
             alt="image"
-            width={400}
-            height={400}
+            width={500}
+            height={500}
             className="w-full h-auto"
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNcvXN1PQAGtgKQxVTcnwAAAABJRU5ErkJggg=="
           />
           <div></div>
         </figure>
