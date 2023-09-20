@@ -3,9 +3,11 @@ import React from "react";
 import { BiLogOut } from "react-icons/bi";
 import logo from "@/public/assets/logo.png";
 import { useRouter } from "next/router";
+import { useClerk } from "@clerk/nextjs";
 
 const Header = () => {
   const { push } = useRouter();
+  const { signOut } = useClerk();
   const search = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -27,7 +29,10 @@ const Header = () => {
             className="border-gray-300 rounded-full px-4 py-2 border w-full placeholder:text-white text-white bg-transparent"
           />
         </form>
-        <button className="border border-red-600 text-red-600 font-bold px-3 py-2 rounded-md flex gap-2 items-center flex-row-reverse text-lg">
+        <button
+          className="border border-red-600 text-red-600 font-bold px-3 py-2 rounded-md flex gap-2 items-center flex-row-reverse text-lg"
+          onClick={() => signOut()}
+        >
           Log out
           <BiLogOut />
         </button>

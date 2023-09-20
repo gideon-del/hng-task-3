@@ -6,13 +6,17 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/utils/firebase";
 import { toaster } from "@/utils/toaster";
+import { useAuth } from "@/context/user";
+import { useSignIn } from "@clerk/nextjs";
 const Login = () => {
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const { signIn, isLoaded } = useSignIn();
   const validateEmail = (value) => {
     const emailPattern =
       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -34,13 +38,18 @@ const Login = () => {
   const submitHandler = async (data) => {
     try {
       setLoading(true);
-      console.log(data);
-      const res = await signInWithEmailAndPassword(
-        auth,
-        data.email,
-        data.password
-      );
-      console.log(res.user);
+      if (!isLoaded) {
+        return;
+      }
+      const res = await signIn.create({
+        identifier: data.email,
+        password: data.password,
+      });
+      if (res.status === "complete") {
+        console.log(res);
+      } else {
+        console.log(res);
+      }
     } catch (error) {
       if (error.message.includes("auth/invalid-login-credentials")) {
         toaster({
@@ -64,15 +73,15 @@ const Login = () => {
       ></div>
       <section className="flex flex-col justify-center flex-1 overflow-hidden">
         <div className=" max-w-sm mx-auto  w-[90%] flex flex-col gap-3">
-          <figure className="mx-auto w-fit">
+          <figure className="mx-auto w-fit bg-white">
             <Image src={logo} alt="Snap Shot Hub" width={50} height={50} />
           </figure>
-          <h1 className="font-bold text-black/40 lg:text-xl text-center capitalize">
+          <h1 className="font-bold text-white/80 lg:text-xl text-center capitalize">
             Welcome Back
           </h1>
 
           <form
-            className="flex flex-col gap-3 font-semibold"
+            className="flex flex-col gap-3 font-semibold text-white/90"
             onSubmit={handleSubmit(submitHandler)}
           >
             <div className="flex flex-col gap-2">
@@ -83,7 +92,7 @@ const Login = () => {
                 {...register("email", {
                   validate: validateEmail,
                 })}
-                className="border border-gray-300 rounded-md p-2 transition"
+                className="border border-gray-900 rounded-md p-2 transition text-black"
                 placeholder="Your Email"
               />
               {errors.email && (
@@ -99,7 +108,7 @@ const Login = () => {
                   validate: validatePassword,
                 })}
                 placeholder="Your Password"
-                className="border border-gray-300 rounded-md p-2 transition"
+                className="border border-gray-300 rounded-md p-2 transition text-black"
               />
               {errors.password && (
                 <p className="text-red-700">{errors.password.message}</p>

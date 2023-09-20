@@ -7,6 +7,7 @@ import {
   DragOverlay,
   DragOverlayItem,
   MouseSensor,
+  PointerSensor,
   TouchSensor,
   closestCenter,
   defaultDropAnimation,
@@ -25,6 +26,7 @@ const Grid = ({ item }) => {
     activationConstraint: {
       delay: 1000,
       tolerance: 5,
+      distance: 10,
     },
   });
 
@@ -47,6 +49,7 @@ const Grid = ({ item }) => {
     setActiveId(null);
   };
   const handleDragMove = ({ active, over }) => {
+    console.log(active, over);
     setImages(
       arrayMove(images, images.indexOf(active.id), images.indexOf(over?.id))
     );
@@ -63,6 +66,7 @@ const Grid = ({ item }) => {
       onDragMove={handleDragMove}
       onDragStart={handleDragStart}
       sensors={sensor}
+      autoScroll={{ enabled: false }}
     >
       <motion.div
         layout

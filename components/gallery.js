@@ -7,7 +7,7 @@ const Gallery = () => {
     <>
       <Header />
       <main>
-        <section>
+        <section className="px-14 md:px-20 max-w-5xl mx-auto">
           <h1>Gallery</h1>
           <Grid />
         </section>

@@ -8,24 +8,22 @@ import { BiLogOut } from "react-icons/bi";
 
 import Grid from "@/components/grid";
 import Header from "@/components/header";
+import Gallery from "@/components/gallery";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/utils/firebase";
+import { useUser } from "@clerk/nextjs";
+import Loader from "@/components/loader";
 
 export default function Home() {
   const [isAuth, setIsAuth] = useState(false);
-  const { user, loading } = useAuth();
+  // const { user, loading, logOut, login } = useAuth();
   const [device, setDevice] = useState(300);
+  const { isSignedIn, isLoaded } = useUser();
 
-  useEffect(() => {
-    setDevice(window.innerWidth);
-  }, []);
   return (
     <>
-      <Header />
-      <main>
-        <section className="px-14 md:px-20 max-w-5xl mx-auto">
-          <h1>Gallery</h1>
-          <Grid />
-        </section>
-      </main>
+      {!isLoaded && <Loader />}
+      {!isSignedIn ? <Login /> : <Gallery />}
     </>
   );
 }
