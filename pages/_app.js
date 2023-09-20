@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }) {
   return (
     <UserProvider>
       <div
-        className={`${montserrat.className} font-montserrat bg-black min-h-screen flex flex-col gap-4`}
+        className={`${montserrat.className} font-montserrat bg-black min-h-screen flex flex-col gap-4 overflow-y-scroll`}
       >
         <Component {...pageProps} />
         <ToastContainer

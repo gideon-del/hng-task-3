@@ -1,7 +1,8 @@
 import { useState } from "react";
-import MasonaryGrid from "./masonaryGrid";
+import MasonaryGrid, { MasonaryItem } from "./masonaryGrid";
 import { dummyData } from "@/utils/dummyData";
 import GridItem from "./gridItem";
+import { motion } from "framer-motion";
 import {
   DndContext,
   DragOverlay,
@@ -9,7 +10,11 @@ import {
   closestCenter,
   defaultDropAnimation,
 } from "@dnd-kit/core";
-import { SortableContext, arrayMove } from "@dnd-kit/sortable";
+import {
+  SortableContext,
+  arrayMove,
+  rectSortingStrategy,
+} from "@dnd-kit/sortable";
 
 const Grid = ({ item }) => {
   const [images, setImages] = useState(item || dummyData);
@@ -28,11 +33,17 @@ const Grid = ({ item }) => {
 
       setImages(newImages);
     }
+    setActiveId(null);
   };
   const handleDragMove = ({ active, over }) => {
     setImages(
       arrayMove(images, images.indexOf(active.id), images.indexOf(over?.id))
     );
+  };
+  const getSingleImage = (id) => {
+    const img = images.filter((img) => img.id === id) || [];
+
+    return img;
   };
   return (
     <DndContext
@@ -41,9 +52,19 @@ const Grid = ({ item }) => {
       onDragMove={handleDragMove}
       onDragStart={handleDragStart}
     >
-      <SortableContext items={images}>
-        <MasonaryGrid items={images} />;
-      </SortableContext>
+      <motion.div
+        layout
+        className=" columns-1 md:columns-2 lg:columns-3 space-y-5 "
+      >
+        <SortableContext items={images} strategy={rectSortingStrategy}>
+          <MasonaryGrid items={images} />;
+        </SortableContext>
+        <DragOverlay>
+          {activeId && getSingleImage(activeId) ? (
+            <MasonaryItem img={getSingleImage(activeId)[0]} />
+          ) : null}
+        </DragOverlay>
+      </motion.div>
     </DndContext>
   );
 };
