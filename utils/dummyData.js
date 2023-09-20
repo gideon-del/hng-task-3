@@ -57,7 +57,7 @@ export const dummyData = [
   {
     img: "https://images.unsplash.com/photo-1574514366389-3c4fef242ca9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c2Vhc29uc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
     tags: ["season", "nature"],
-    id: "img11",
+    id: "img12",
   },
 ];
 export const getSingleTags = (id) => {
