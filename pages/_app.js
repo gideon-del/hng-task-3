@@ -14,7 +14,9 @@ const montserrat = Montserrat({
 export default function App({ Component, pageProps }) {
   return (
     <UserProvider>
-      <div className={`${montserrat.className} font-montserrat bg-black`}>
+      <div
+        className={`${montserrat.className} font-montserrat bg-black min-h-screen flex flex-col gap-4`}
+      >
         <Component {...pageProps} />
         <ToastContainer
           position="top-center"
