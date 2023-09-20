@@ -27,6 +27,7 @@ const Grid = ({ items }) => {
 
   const sensor = useSensors(touchSensor, useSensor(MouseSensor));
   const [activeId, setActiveId] = useState(null);
+  const [overId, setOverId] = useState(null);
   const handleDragStart = ({ active }) => {
     setActiveId(active.id);
   };
@@ -42,8 +43,10 @@ const Grid = ({ items }) => {
       setImages(newImages);
     }
     setActiveId(null);
+    setOverId(null);
   };
   const handleDragMove = ({ active, over }) => {
+    setOverId(over?.id);
     setImages(
       arrayMove(images, images.indexOf(active.id), images.indexOf(over?.id))
     );
@@ -60,7 +63,6 @@ const Grid = ({ items }) => {
       onDragMove={handleDragMove}
       onDragStart={handleDragStart}
       sensors={sensor}
-      autoScroll={{ enabled: false }}
     >
       <motion.div
         layout
@@ -68,7 +70,7 @@ const Grid = ({ items }) => {
       >
         <SortableContext items={images} strategy={rectSortingStrategy}>
           {images.map((img) => (
-            <MasonaryItem key={img.id} img={img} />
+            <MasonaryItem key={img.id} img={img} overId={overId} />
           ))}
         </SortableContext>
         <DragOverlay>

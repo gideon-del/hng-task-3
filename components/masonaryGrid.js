@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { CSS } from "@dnd-kit/utilities";
 import { motion } from "framer-motion";
-export const MasonaryItem = ({ img }) => {
+export const MasonaryItem = ({ img, overId }) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useSortable({ id: img.id });
   const transition = "transform 250ms cubic-bezier(0.68, -0.55, 0.27, 1.55)";
@@ -28,7 +28,7 @@ export const MasonaryItem = ({ img }) => {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.8 }}
       transition={{ duration: 0.2 }}
-      className="touch-mainpulation"
+      className="touch-mainpulation drop_item"
     >
       <div className={`my-masonry-grid_item drop_item  bg-transparent`}>
         <figure className="drop_item">
@@ -52,6 +52,17 @@ export const MasonaryItem = ({ img }) => {
           ))}
         </ul>
       </div>
+      {overId && overId === img.id && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          exit={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="bg-black/40 grid place-content-center"
+        >
+          <span className="text-white font-bold">Drop Here</span>
+        </motion.div>
+      )}
     </motion.div>
   );
 };
