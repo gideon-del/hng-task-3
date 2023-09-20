@@ -25,8 +25,6 @@ const Grid = ({ items }) => {
   const touchSensor = useSensor(TouchSensor, {
     activationConstraint: {
       delay: 1000,
-      tolerance: 5,
-      distance: 10,
     },
   });
 
