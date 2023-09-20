@@ -52,4 +52,19 @@
     grid-row: 1/1;
     pointer-events: none;
   }
+  .header_grid {
+    @apply grid;
+    grid-template-areas:
+      "logo input input"
+      "button button button";
+  }
+  .btn {
+    grid-area: button;
+  }
+  .search {
+    grid-area: input;
+  }
+  .logo {
+    grid-area: logo;
+  }
 }

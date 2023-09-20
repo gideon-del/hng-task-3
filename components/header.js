@@ -24,29 +24,31 @@ const Header = () => {
   };
   return (
     <header className="bg-white/10">
-      <div className="flex justify-between items-center py-2 max-w-7xl mx-auto">
-        <figure>
+      <div className="md:flex justify-between items-center py-2 px-4 max-w-7xl mx-auto header_grid gap-4">
+        <figure className="logo">
           <Image src={logo} alt="Snap Shot" width={40} height={40} />
         </figure>
-        <form className="basis-3/5" onSubmit={search}>
+        <form className="basis-3/5 search" onSubmit={search}>
           <input
             type="text"
             name="search"
             placeholder="Search by tag e.g Animal"
-            className="border-gray-300 rounded-full px-4 py-2 border w-full placeholder:text-white text-white bg-transparent"
+            className="border-gray-300 rounded-full px-4 py-2 border w-full placeholder:text-white/30 text-white bg-transparent"
           />
         </form>
         {user ? (
           <button
-            className="border border-red-600 text-red-600 font-bold px-3 py-2 rounded-md flex gap-2 items-center flex-row-reverse text-lg"
+            className="border border-red-600 text-red-600 font-bold text-center justify-center px-3 py-2 rounded-md flex gap-2 items-center flex-row-reverse text-lg btn"
             onClick={logout}
           >
             Log out
-            <BiLogOut />
+            <span className="hidden md:block">
+              <BiLogOut />
+            </span>
           </button>
         ) : (
           <button
-            className="bg-blue-700  text-white font-bold px-3 py-2 rounded-md flex gap-2 items-center flex-row-reverse text-lg"
+            className="bg-blue-700  text-white font-bold px-3 justify-center py-2 rounded-md flex gap-2 items-center flex-row-reverse text-lg btn"
             onClick={() => push("/")}
           >
             Log in

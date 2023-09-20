@@ -16,6 +16,7 @@ import {
   arrayMove,
   rectSortingStrategy,
 } from "@dnd-kit/sortable";
+import Preview from "./preview";
 
 const Grid = ({ items }) => {
   const [images, setImages] = useState(items || dummyData);
@@ -75,7 +76,7 @@ const Grid = ({ items }) => {
         </SortableContext>
         <DragOverlay>
           {activeId && getSingleImage(activeId) ? (
-            <MasonaryItem img={getSingleImage(activeId)[0]} />
+            <Preview img={getSingleImage(activeId)[0]} />
           ) : null}
         </DragOverlay>
       </motion.div>
