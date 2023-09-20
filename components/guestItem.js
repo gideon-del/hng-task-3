@@ -12,7 +12,7 @@ const GuestItem = ({ img }) => {
       transition={{ duration: 0.2 }}
     >
       <div
-        className={`my-masonry-grid_item drop_item touch-none bg-transparent`}
+        className={`my-masonry-grid_item drop_item touch-manipulation bg-transparent`}
       >
         <figure className="drop_item">
           <Image
