@@ -40,6 +40,8 @@ const Preview = ({ img }) => {
             width={100}
             height={100}
             className="w-44 h-44"
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNcvXN1PQAGtgKQxVTcnwAAAABJRU5ErkJggg=="
           />
         </figure>
       </div>

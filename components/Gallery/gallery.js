@@ -13,16 +13,23 @@ const Loader = () => {
 
 const Gallery = () => {
   const Grid = useCanDrag();
-  const { filter, query, querying } = useFilter();
-  const items = query.trim().length > 0 ? filter : dummyData;
+  const { filters, query, querying } = useFilter();
+
   return (
     <>
       <Header />
       <main className="flex-1 relative">
         <section className="px-14 md:px-20 max-w-7xl mx-auto">
-          <h1 className="capitalize">{query || "Gallery"}</h1>
-
-          <Grid items={items} />
+          <h1 className="capitalize text-white text-xl lg:text-2xl mb-4">
+            {query || "Gallery"}
+          </h1>
+          {query.trim().length > 0 && filters.length === 0 && (
+            <p className="text-white font-bold text-center text-lg">
+              No image found with tag{" "}
+              <span className="text-red-500">{query}</span>
+            </p>
+          )}
+          <Grid />
         </section>
         {querying && <Loader />}
       </main>

@@ -18,9 +18,10 @@ const GuestItem = ({ img }) => {
           <Image
             src={img.img}
             alt="image"
-            width={400}
-            height={400}
-            className="w-full h-auto"
+            width={500}
+            height={500}
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNcvXN1PQAGtgKQxVTcnwAAAABJRU5ErkJggg=="
           />
           <div></div>
         </figure>
