@@ -63,4 +63,7 @@ export const dummyData = [
 export const getSingleTags = (id) => {
   return dummyData.filter((img) => img.tags.includes(id)) || [];
 };
-export const allTags = ["architecture", "nature", "animals"];
+const tags = [];
+dummyData.map((img) => tags.push(...img.tags));
+export const allTags = new Set(tags);
+export const mainTags = [...allTags.values()];

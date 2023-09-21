@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../header";
 import useCanDrag from "@/hooks/useCanDrag";
 import { useFilter } from "@/context/filters";
-import { dummyData } from "@/utils/dummyData";
+import { allTags, dummyData, mainTags } from "@/utils/dummyData";
 const Loader = () => {
   return (
     <div className="absolute top-0 inset-x-0 w-full h-[90vh] grid place-items-center bg-black">
@@ -24,10 +24,21 @@ const Gallery = () => {
             {query || "Gallery"}
           </h1>
           {query.trim().length > 0 && filters.length === 0 && (
-            <p className="text-white font-bold text-center text-lg">
-              No image found with tag{" "}
-              <span className="text-red-500">{query}</span>
-            </p>
+            <>
+              <p className="text-white font-bold text-center text-lg mb-5">
+                No image found with tag{" "}
+                <span className="text-red-500">{query}</span>
+              </p>
+              <p className="text-white font-bold text-center">
+                Availabele tags are{" "}
+                {mainTags.map((tag, i) => (
+                  <span className="capitalize" key={tag}>
+                    {" "}
+                    {tag} {i === mainTags.length - 1 ? "." : ", "}
+                  </span>
+                ))}
+              </p>
+            </>
           )}
           <Grid />
         </section>
