@@ -1,5 +1,5 @@
-import Login from "@/components/login";
-import Gallery from "@/components/gallery";
+import Auth from "@/components/Auth/auth";
+import Gallery from "@/components/Gallery/gallery";
 import { useUser } from "@clerk/nextjs";
 import Loader from "@/components/loader";
 
@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       {!isLoaded && <Loader />}
-      {user ? <Gallery /> : <Login />}
+      {user ? <Gallery /> : <Auth />}
     </>
   );
 }

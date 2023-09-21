@@ -1,5 +1,5 @@
-import Grid from "@/components/grid";
-import GuestGrid from "@/components/guestGrid";
+import Grid from "@/components/Gallery/grid";
+import GuestGrid from "@/components/Gallery/guestGrid";
 import { useUser } from "@clerk/nextjs";
 
 export default function useCanDrag() {

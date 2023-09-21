@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./header";
+import Header from "../header";
 import useCanDrag from "@/hooks/useCanDrag";
 import { useFilter } from "@/context/filters";
 import { dummyData } from "@/utils/dummyData";
