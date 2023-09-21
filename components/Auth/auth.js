@@ -24,7 +24,7 @@ const Auth = () => {
   const AuthCompononent = isLogin ? Login : SignUp;
   const validateEmail = (value) => {
     const emailPattern =
-      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-]+)(\.[a-zA-Z]{2,5}){1,2}$/;
     if (value.trim().length === 0) {
       return "This field is required";
     }
@@ -40,27 +40,7 @@ const Auth = () => {
       return "Password must be greater than or equal to 8 characters";
     }
   };
-  const submitHandler = async (data) => {
-    try {
-      setLoading(true);
-      if (!isLoaded) {
-        return;
-      }
-      const res = await signIn.create({
-        identifier: data.email,
-        password: data.password,
-      });
-      await setActive({ session: res.createdSessionId });
-      toaster({ state: "success", message: "Welcome" });
-    } catch (error) {
-      toaster({
-        state: "error",
-        message: "Invalid credentials. Check your email or password",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+
   return (
     <>
       {loading && <Loader />}
