@@ -26,14 +26,9 @@ const GuestItem = ({ img }) => {
           <div></div>
         </figure>
         <ul className="flex gap-2 items-start my-2 justify-end ">
-          {img.tags.map((tag) => (
-            <li
-              key={tag}
-              className="capitalize bg-gray-500 px-3 py-2 rounded-md text-white text-center w-fit"
-            >
-              {tag}
-            </li>
-          ))}
+          <li className="capitalize bg-gray-500 px-3 py-2 rounded-md text-white text-center w-fit">
+            {img.tags}
+          </li>
         </ul>
       </div>
     </motion.div>
